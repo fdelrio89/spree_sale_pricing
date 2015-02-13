@@ -52,3 +52,11 @@ Deface::Override.new({
   :insert_after => "[data-hook='sku']",
   :partial => "spree/admin/variants/variant_msrp_field"
 })
+
+Deface::Override.new({
+  :virtual_path => "spree/admin/shared/_product_tabs",
+  :name => "add_sales_products_tab",
+  :insert_bottom => "[data-hook='admin_product_tabs']",
+  :partial => "spree/admin/products/sales",
+  :disabled => false
+})

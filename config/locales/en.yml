@@ -2,6 +2,7 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  sales: "Sales"
   sale_price: "Sale Price"
   original_price: "Original Price"
   sale_prices: "Sale Prices"
