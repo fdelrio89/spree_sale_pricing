@@ -1,0 +1,9 @@
+es:
+  sales: "Ofertas"
+  sale_price: "Precio de Oferta"
+  original_price: "Precio Original"
+  sale_prices: "Precios de Ofertas"
+  add_sale_prices: "Añadir Precio de Ofertas"
+  sale_price_start_at: "Fecha de Inicio de Oferta"
+  sale_price_end_at: "Fecha de Término de Oferta"
+  sale_price_enabled: "Activado"
