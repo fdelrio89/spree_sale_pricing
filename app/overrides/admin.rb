@@ -24,6 +24,20 @@ Deface::Override.new({
 
 Deface::Override.new({
   virtual_path: "spree/admin/products/_form",
+  name: "change_product_price_to_display_original_price_instead",
+  replace_contents: "[data-hook='admin_product_form_price']",
+  text: %{
+            <%= f.field_container :original_price do %>
+              <%= f.label :original_price, raw(Spree.t(:master_price) + content_tag(:span, ' *', :class => "required")) %>
+              <%= f.text_field :original_price, :value => number_to_currency(@product.original_price, :unit => ''), :required => true %>
+              <%= f.error_message_on :original_price %>
+            <% end %>
+          },
+  disabled: false
+})
+
+Deface::Override.new({
+  virtual_path: "spree/admin/products/_form",
   name: "add_on_sale_to_product_form",
   insert_bottom: "[data-hook='admin_product_form_price']",
   text: '<% if @product.on_sale? %><strong><%= "(On sale for #{@product.display_price})" %></strong><% end %>',

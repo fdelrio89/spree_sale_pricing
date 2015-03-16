@@ -48,5 +48,9 @@ module Spree
     def stop
       update_attributes({ end_at: Time.now, enabled: false })
     end
+    
+    def variant
+      Spree::Price.find(price_id).variant
+    end
   end
 end

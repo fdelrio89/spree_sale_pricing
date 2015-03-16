@@ -8,8 +8,12 @@ Spree::Variant.class_eval do
   alias_attribute :msrp, :original_price 
 
   # TODO also accept a class reference for calculator type instead of only a string
+  # refactor
   def put_on_sale(value, start_at = Time.now, end_at = nil, enabled = true, all_currencies = true, calculator_type = "Spree::Calculator::DollarAmountSalePriceCalculator")
-    run_on_prices(all_currencies) { |p| p.put_on_sale value, calculator_type, start_at, end_at, enabled }
+    self.touch
+    sale_price = run_on_prices(all_currencies) { |p| p.put_on_sale value, calculator_type, start_at, end_at, enabled }
+    replicate_sale_on_variants(sale_price, value, start_at, end_at) if is_master?
+    sale_price
   end
   alias :create_sale :put_on_sale
 
@@ -64,6 +68,12 @@ Spree::Variant.class_eval do
       prices.each { |p| block.call p }
     else
       block.call default_price
+    end
+  end
+  
+  def replicate_sale_on_variants(sale_price, value, start_at = Time.now, end_at = nil)
+    product.variants.each do |variant|
+      variant.put_on_sale(value, start_at, end_at)
     end
   end
 end
