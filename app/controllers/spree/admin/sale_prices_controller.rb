@@ -20,6 +20,7 @@ module Spree
       def destroy
         @sale_price = Spree::SalePrice.find(params[:id])
         @sale_price.destroy
+        @sale_price.variant.touch
 
         respond_with(@sale_price)
       end
